@@ -121,10 +121,10 @@ export class SessionService {
 			})
 		]);
 
-		this.startRoundTimer({
-			roundId: activeRound.id,
-			session: activeSession
-		});
+		// this.startRoundTimer({
+		// 	roundId: activeRound.id,
+		// 	session: activeSession
+		// });
 		return {
 			status: 200,
 			message: `Session started successfully!`,

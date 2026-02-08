@@ -29,9 +29,10 @@ export class SubmissionRepository {
             's.round_score',
             's.session_id',
             's.round_id',
-            's.letter'
+            'r.letter'
         ])
         .leftJoin(knexConnection.raw('users AS u ON s.user_id = u.id::TEXT'))
+        .leftJoin(knexConnection.raw('rounds AS r ON s.round_id = r.id::TEXT'))
             .where('s.session_id', sessionId)
             .andWhere('s.round_id', round_id)
             .orderBy('s.round_score', 'desc');
@@ -56,7 +57,6 @@ export class SubmissionRepository {
     }
 
     async findUnreviewedBySessionIdAndRound(sessionId: string, roundId: string) {
-        console.log('Finding unreviewed submissions for session:', sessionId, 'round:', roundId);
         return await knexConnection('submissions')
         .select('*')
         .where({ session_id: sessionId, round_id: roundId, graded: false });

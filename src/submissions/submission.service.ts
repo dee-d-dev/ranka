@@ -70,7 +70,7 @@ export class SubmissionService {
             await this.sessionService.endRound({session, roundId: currentRound.id, reason: 'all_submitted'});
         }
 
-        // this.sessionService.autoSubmitMissing(currentRound.id);
+        this.sessionService.autoSubmitMissing(currentRound.id);
         return submission;
     }
 
@@ -111,7 +111,8 @@ export class SubmissionService {
             };
         }
 
-        const submissions = await this.submissionRepo.getRoundLeaderboard(sessionId, round ?? session.current_round);
+        const latestRound = await this.roundRepo.findLatestRoundBySessionId(sessionId);
+        const submissions = await this.submissionRepo.getRoundLeaderboard(sessionId, round ?? latestRound.id);
         return submissions;
     }
 

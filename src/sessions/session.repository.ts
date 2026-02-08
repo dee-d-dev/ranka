@@ -19,7 +19,7 @@ export class SessionRepository {
     }
 
     async finndActiveSessionById(id: string) {
-        return await knexConnection('sessions').where({ id, ended_at: null }).first();
+        return await knexConnection('sessions').where({ id }).first();
     }
 
     async getSessionLeaderboard(sessionId: string) {

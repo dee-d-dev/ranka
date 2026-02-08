@@ -1,11 +1,24 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity('users')
 export class Users {
 	@PrimaryGeneratedColumn('uuid')
-	// eslint-disable-next-line indent
 	id!: string;
 
 	@Column()
 	username!: string;
+
+	@Column()
+	session_id!: string;
+
+	@Column({
+		default: 0
+	})
+	score!: number;
+
+	@CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+	created_at!: Date;
+
+	@UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
+	updated_at!: Date;
 }

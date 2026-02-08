@@ -4,10 +4,11 @@ import { AppService } from './app.service';
 import { UsersController } from './users/users.controller';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { GroupsModule } from './groups/groups.module';
-import { Users } from './users/entities/users.entity';
+import { SessionModule } from './sessions/session.module';
 import { HealthModule } from './health/health.module';
 import { HealthController } from './health/health.controller';
+import { SubmissionsModule } from './submissions/submissions.module';
+import { RoundsModule } from './rounds/rounds.module';
 
 @Module({
 	imports: [
@@ -22,9 +23,11 @@ import { HealthController } from './health/health.controller';
 			synchronize: true,
 		}),
 		UsersModule,
-		GroupsModule,
+		SessionModule,
 		HealthModule,
-		AppModule
+		AppModule,
+		SubmissionsModule,
+		RoundsModule
 	],
 	controllers: [AppController, HealthController, UsersController],
 	providers: [AppService],
